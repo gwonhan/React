@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01_lecture-source/02_component/02_rendering/01_rendering-element.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01_lecture-source/02_component/02_rendering/01_rendering-element.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01_lecture-source/02_component/02_rendering/03_conditional-rendering.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01_lecture-source/02_component/02_rendering/03_conditional-rendering.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01_lecture-source/02_component/03_component/01__class-type-copmonent.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01_lecture-source/02_component/03_component/01__class-type-copmonent.html"
+        }
+    ]
+}

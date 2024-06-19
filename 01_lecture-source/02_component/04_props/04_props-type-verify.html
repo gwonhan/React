@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> 
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+    
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function PropsVerify({name,favoriteNumber,children}){
+
+            return(
+                <>
+                <h1>내 이름은{name}</h1>
+                <h3> 좋아하는 숫자는 {favoriteNumber}임</h3>
+                <h3> 내자식 {children}</h3>
+                </>
+            );
+        }
+        
+        /*
+            안 되어야 하는게 정상인 것 같지만, 실제로는 동작을 한다.
+            하지만, 개발자 도구를 봤을 때 name의 타입과 favoriteNumber 의 필요성을 
+            warning 으로 알려주고 있다.
+            필수적인 설정은 아니다. 하지만 큰 규모의 프로젝트를 진행하거나
+            다른 개발자와 협업을 하게 된다면
+            해당하는 컴포넌트에 어떠한 props 가 필요한지 쉽게 알수 있게 만들어 주기 때문에
+            개발의 능률이 좋아질 수 있다.
+        */
+        PropsVerify.prototypes={
+            name: ProtoTypes.string,                            //name props 속성은 string 이여야 한다.
+            favoriteNumber: ProtoTypes.number.isRequired        //favoriteNumber props 속성은 number 형 이면서, 반드시 주어져야 한다.
+        };
+
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+
+    [
+        <PropsVerify name="파일구리" favoriteNumber={5}>칠드런 노드</PropsVerify>,
+        <PropsVerify name={3}></PropsVerify>
+    ]
+);
+
+    </script>
+</body>
+</html>
