@@ -17,6 +17,18 @@
             "name": "http://127.0.0.1:3000/01_lecture-source/02_component/03_component/01__class-type-copmonent.html",
             "request": "launch",
             "url": "http://127.0.0.1:3000/01_lecture-source/02_component/03_component/01__class-type-copmonent.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01_lecture-source/02_component/05_state/02_prev-state.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01_lecture-source/02_component/05_state/02_prev-state.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01_lecture-source/02_component/05_state/04_useState.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01_lecture-source/02_component/05_state/04_useState.html"
         }
     ]
 }
