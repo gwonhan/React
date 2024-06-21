@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> 
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background: skyblue;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            height: 100px;
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            flex-grow: 1;
+            background: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .todo-list {
+            background: white;
+            width: 500px;
+            border: 1px solid black;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 50px;
+            overflow-y: auto; /* 스크롤 추가 */
+        }
+
+        .todo-list p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .todo-list label {
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+
+        .todo-list button {
+            border: none;
+            background: red;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .append-list {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .append-list input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex-grow: 1;
+            font-size: 16px;
+        }
+
+        .append-list button {
+            background: gold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            height: 36px;
+            cursor: pointer;
+        }
+
+        .footer {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            background: black;
+            color: white;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+            padding: 8px 12px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const { useState } =React;
+
+        function Header(){
+
+            return (
+                <div className='header'>
+                    <h1>Todo List {new Date().toDateString()}</h1>
+                </div>
+            );
+        }
+
+
+
+
+        function TodoItems({todos, setTodos}){
+
+                const removeTodo =(id) => {
+                    const removedList = todos.filter(todo => todo.id !== id)
+
+                    setTodos(removedList);
+                }
+
+                const onChangeHandler = e=>{
+                    const changeIsDoneList = todos.map(
+                        todo => {
+                            if(todo.id === parseInt(e.target.id)){
+                                todo.isDone = e.target.checked;
+                                }
+
+                        return todo;
+                    }
+                )
+                setTodos(changeIsDoneList);
+            }
+
+            return (
+                <>
+                    {todos.map(todo => (
+                        <p key={todo.id}>
+                            <input type="checkbox" id={todo.id} checked={todo.isDone} onChange={onChangeHandler} />
+                            <label htmlFor={todo.id} style={{ textDecoration: todo.isDone ? 'line-through' : 'none' }}>
+                                {todo.description}
+                            </label>
+                            <button onClick={() => removeTodo(todo.id)}>x</button>
+                        </p>
+                    ))}
+                </>
+            );
+        }
+        function TodoList(){
+            const [todos,setTodos] = useState([
+                {id:1, description:'할 일 목록을 추가해봐라', isDone: false},
+                {id: 2, description: '할 일 2', isDone: false},
+                {id: 3, description: '할 일 3', isDone: false},
+                {id: 4, description: '할 일 4', isDone: false},
+                {id: 5, description: '할 일 5', isDone: false},
+                {id: 6, description: '할 일 6', isDone: false},
+                {id: 7, description: '할 일 7', isDone: false},
+                {id: 8, description: '할 일 8', isDone: false},
+                {id: 9, description: '할 일 9', isDone: false},
+                {id: 10, description: '할 일 10', isDone: false},
+                {id: 11, description: '할 일 11', isDone: false}
+
+
+
+            ]);
+
+            
+            // value
+            const [inputText, setInputText]=useState('');
+            const [nextId, setNextId]= useState(12);
+
+            //페이징 처리
+            const [currentPage, setCurrentPage] = useState(1);
+            const itemsPerPage = 10;
+
+
+            //onChange
+            const onChangeHandler = e =>{
+                setInputText(e.target.value)
+            }
+
+            //onClick
+
+            const onClickHandler = () => {
+                const newTodos = [
+                    ...todos,
+                    { id: nextId, 
+                        description: inputText, 
+                        isDone: false 
+                    }
+                ];
+
+                //비워주기
+                setInputText('');
+                setNextId(nextId + 1);
+                setTodos(newTodos);
+
+                
+            }
+
+             // onKeyPress
+            const onKeyDownHandler = e => {
+                if (e.key === 'Enter') {
+                onClickHandler();
+                }
+            };
+
+            const indexOfLastTodo = currentPage * itemsPerPage;
+            const indexOfFirstTodo = indexOfLastTodo - itemsPerPage;
+            const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
+
+              // 페이지네이션 함수
+            const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
+
+            return (
+        <>
+            <h3>ToDo-List</h3>
+            <div className="todo-list">
+                <TodoItems todos={currentTodos} setTodos={setTodos} />
+            </div>
+
+            <div className="append-list">
+                <input
+                    type="text"
+                    value={inputText}
+                    onChange={onChangeHandler}
+                    onKeyDown={onKeyDownHandler}
+                    placeholder="할 일을 입력하세요..." 
+                />
+
+                <button onClick={onClickHandler}>등록하기</button>
+            </div>
+
+            <div className="pagination">
+                {[...Array(Math.ceil(todos.length / itemsPerPage)).keys()].map(
+                    number => (
+                        <button
+                            key={number + 1}
+                            onClick={() => paginate(number + 1)}
+                        >
+                            {number + 1}
+                        </button>
+                    )
+                )}
+            </div>
+
+                    </>
+            );
+        }
+
+        function Content(){
+        
+            return(
+                <div className="content">
+                <TodoList/>
+                </div>
+            );
+        }
+
+        function Footer(){
+        
+            return(
+                <div className="footer">
+                <p>Copptight 2024. Lee</p>
+                </div>
+        );
+    }
+
+    function App(){
+        return(
+                <div className="container">
+                <Header/>
+                <Content/>
+                <Footer/>
+                </div>
+            );
+
+    }
+
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+
+
+    </script>    
+</body>
+</html>
+
