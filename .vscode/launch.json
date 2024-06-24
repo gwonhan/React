@@ -41,6 +41,30 @@
             "name": "http://127.0.0.1:3000/01_lecture-source/02_component/07_iteration/03_todo-list.html",
             "request": "launch",
             "url": "http://127.0.0.1:3000/01_lecture-source/02_component/07_iteration/03_todo-list.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01_lecture-source/02_component/08_lifecycle/01_lifecycle-method-for-mount.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01_lecture-source/02_component/08_lifecycle/01_lifecycle-method-for-mount.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/01_lecture-source/02_component/08_lifecycle/02_lifecycle-method-for-update.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/01_lecture-source/02_component/08_lifecycle/02_lifecycle-method-for-update.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/03_hooks/01_useEffect/03_useEffect-update.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/03_hooks/01_useEffect/03_useEffect-update.html"
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/03_hooks/01_useEffect/04_useEffect-cleanup.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/03_hooks/01_useEffect/04_useEffect-cleanup.html"
         }
     ]
 }
