@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const{useState, useEffect, useMemo} =React;
+
+
+
+        function App(){
+
+            const[isKorea,setIsKorea]= useState(true); // 불리언 타입
+            const[number,setNumber]=useState(0);
+
+            console.log('랜더링 호출됨...');
+
+            /* 1. 지역 변수에 문자열로 초기화(number state 변화시에 location는 변화 없음 - 기본 자료형이라서) */
+            // const location = isKorea ? '한국' : '외국'; 
+
+
+
+            /* 2. 지역 변수에 객체로 초기화(number state 가 변화시에 location 에 변화가 있음 -> why?  객체의 주소값이기 떄문에)*/
+            // const location ={
+            //     contry: isKorea ? '한국' : '외국'
+            // }
+
+
+            /* 3.지역변수에 useMemo 의 반환값으로 초기화(number state 변화시에 location 에 변화가 없음 -> isKorea 가 동일하기 떄문에)*/
+            const location =useMemo(()=>{
+                return {
+                    contry:isKorea ? '한국' : '외국'
+                }
+            },[isKorea])
+
+
+            //useEffect 를 이용해서 콜백함수를 mount 시점 및 location 값에 변화가 있을 떄만 동작하게 설정.
+            useEffect(()=> {
+                console.log('유즈이펙트 확인')
+            },[location]);
+
+            return(
+                <>
+                <h2>지금 당신이 있는 위치는 ?</h2>
+                <p> 국가: { location.contry }</p>
+                <button onClick={() => setIsKorea(!isKorea)}> 국가 토글 하기</button>
+                <hr/>
+
+                <h2>좋아하는 숫자를 입력해주세요</h2>
+                <input 
+                type="number"
+                value={number}
+                onChange ={e=> setNumber (e.target.value)}
+                />
+                </>
+            )
+        }
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+</script>
+    
+</body>
+</html>
