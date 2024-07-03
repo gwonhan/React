@@ -1,5 +1,4 @@
 import { useState } from "react";
-import App from "./App";
 import axios from "axios";
 
 
@@ -12,7 +11,7 @@ function App() {
 
   const onClickHandler =()=>{
     
-    axios.get(`https://pokeapi.co/api/v2/pokemon-form/${value}`)
+    axios.get(`https://pokeapi.co/api/v2/pokemon-form/${Text}`)
     .then(res =>setimage(res.data.sprites.front_shiny))
     .catch(err=>console.log(err))
     
